@@ -4,9 +4,9 @@
 filterUI <- function(id) {
   ns <- NS(id)
   tagList(
-    selectInput(ns("gender"), "Select Gender:", choices = c("All", unique(filter_cohort$gender))),
-    selectInput(ns("country"), "Select Country:", choices = c("All", unique(filter_cohort$country))),
-    selectInput(ns("availability"), "Select Availability:", choices = c("All", unique(filter_cohort$availability)))
+    uiOutput(ns("gender_ui")),
+    uiOutput(ns("country_ui")),
+    uiOutput(ns("availability_ui"))
   )
 }
 
@@ -15,6 +15,16 @@ filterUI <- function(id) {
 # -------------------------------
 filterServer <- function(id, data) {
   moduleServer(id, function(input, output, session) {
+    output$gender_ui <- renderUI({
+      selectInput(session$ns("gender"), "Select Gender:", choices = c("All", unique(data()$gender)))
+    })
+    output$country_ui <- renderUI({
+      selectInput(session$ns("country"), "Select Country:", choices = c("All", unique(data()$country)))
+    })
+    output$availability_ui <- renderUI({
+      selectInput(session$ns("availability"), "Select Availability:", choices = c("All", unique(data()$availability)))
+    })
+    
     reactive({
       df <- data()
       if (input$gender != "All") df <- df %>% filter(gender == input$gender)

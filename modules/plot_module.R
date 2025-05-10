@@ -9,8 +9,6 @@ plotUI <- function(id) {
   )
 }
 
-
-
 # -------------------------------
 # Module Server: Plots
 # -------------------------------
@@ -34,3 +32,5 @@ plotServer <- function(id, data) {
     })
   })
 }
+
+
