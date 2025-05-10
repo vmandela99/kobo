@@ -27,4 +27,3 @@ jobs:
     - name: Run Shiny App (or Deploy to your Server)
       run: |
         Rscript app.R
-
