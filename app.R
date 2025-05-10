@@ -6,6 +6,11 @@ library(KoboconnectR)
 source("modules/filters_module.R")
 source("modules/plot_module.R")
 
+# Read credentials from environment
+username <- Sys.getenv("KOBOTOOLBOX_USERNAME")
+password <- Sys.getenv("KOBOTOOLBOX_PASSWORD")
+url <- "kf.kobotoolbox.org"
+
 
 # -------------------------------
 # UI
@@ -39,9 +44,9 @@ server <- function(input, output, session) {
     valueFunc = function() {
       # Fetch data from KoboToolbox
       ai_cohort1 <- kobo_df_download(
-        url = "kf.kobotoolbox.org",
-        uname = "vickman",
-        pwd = "vickman",
+        url = url,
+        uname = username,
+        pwd = password,
         assetid = "akWjF8fLC662zYmYYh6YwR"
       )
       
